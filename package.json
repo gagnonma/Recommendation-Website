@@ -7,10 +7,12 @@
     "start": "next start"
   },
   "dependencies": {
+    "danfojs-node": "^0.2.0",
     "mongodb": "^3.5.9",
     "next": "latest",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "scikit-learn": "^0.1.0"
   },
   "license": "MIT",
   "devDependencies": {
