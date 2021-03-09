@@ -1,4 +1,4 @@
-import { connectToDatabase } from "../util/mongodb"
+import { connectToDatabase } from "./mongodb"
 
 export async function getRecommendations(movieList) {
     const { db } = await connectToDatabase();

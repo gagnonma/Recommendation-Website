@@ -1,38 +1,20 @@
 import { useRouter } from 'next/router'
 import { connectToDatabase } from "../util/mongodb"
 import { getRecommendations } from "../util/getRecommedations"
-
-const Media = ({title, poster, rating}) => (
-    <div>
-        <img src={poster} />
-        <div>
-            <p>{title}</p>
-            <p>{rating}</p>
-        </div>
-    </div>
-
-);
+import NavBar from '../components/NavBar'
+import MediaCard from '../components/MediaCard'
 
 
 
-export default function Recommend(recommendations) {
-    console.log(recommendations)
-  
-
-    // function renderMedia() {
-    //     const mediaList = [];
-    //     for(let i = 0; i < recommendations.len)
-    // }
+export default function Recommend({recs}) {
+    console.log(recs)
 
     return (
         <div>
+            <NavBar/>
             <h1>Your Recommendations are: </h1>
-            {recommendations.recs.map((media) => (
-                <Media 
-                title={media.Title}
-                poster={media.Poster}
-                rating={media.Ratings[0].Value}
-                />
+            {recs.map((media) => (
+                <MediaCard media={media}/>
             ))}
         </div>
     )
