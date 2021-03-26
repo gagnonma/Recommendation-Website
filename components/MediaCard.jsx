@@ -1,12 +1,17 @@
 import React from 'react'
+import Link from 'next/link'
+import AddRemoveButton from './AddRemoveButton'
+
+
 
 function MediaCard({media}) {
     console.log(media.poster)
     return (
-        <div>
-            <img src={media.Poster} />
+        <div id="mediaCard">
+            <Link href={`/title/${media.imdbID}`}><img src={media.Poster} /></Link>
             <p>{media.Title}</p>
             <p>{media.imdbRating}</p>
+            <AddRemoveButton mediaInfo={media} />
         </div>
     )
 }

@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "util/utils.js", "util/getRecommedations.js", "pages/api/getMediaList.js", "components/Login.jsx", "pages/index.jsx", "contexts/account.js"  ],
+, "util/utils.js", "util/getRecommendations.js", "pages/api/getMediaList.js", "components/Login.jsx", "pages/index.jsx", "contexts/account.js"  ],
   "exclude": [
     "node_modules"
   ]

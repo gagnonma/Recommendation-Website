@@ -1,31 +1,51 @@
 import { useRouter } from 'next/router'
-import { getRecommendations } from '../../util/getRecommedations'
+import { getRecommendations } from '../../util/getRecommendations'
 import { connectToDatabase } from "../../util/mongodb"
 import NavBar from '../../components/NavBar'
 import MediaCard from '../../components/MediaCard'
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import AccountContext from '../../contexts/account'
-import DropdownButton from 'react-bootstrap/DropdownButton'
+import { useCurrentUser } from '../../hooks/index';
+import Dropdown  from 'react-dropdown';
+import AddRemoveButton from '../../components/AddRemoveButton'
 
 
-export default function Media ({mediaInfo, recs}){
+
+export default function Media ({mediaInfo}){
     // console.log(mediaInfo.recs[0])
-    const {account, loggedIn, login,logout} = useContext(AccountContext)
-    const addToList = async(e) => {
-        account.lists[0].mediaList.push(mediaInfo)
-        const info = {
-            username: account.username,
-            lists: account.lists
+    const [user, { mutate }] = useCurrentUser();  
+    const [recs, setRecs] = useState({id : mediaInfo.imdbId, list: []})
+    
+    const getRecs = async() => {
+
+        const data= {
+            movieList: [mediaInfo.imdbID],
+            genreList: [],
+            type: ['movie', 'series'],
+            min: 0,
+            max: 10
         }
+
         try {
-            const res = await fetch('/api/addMediaToList', {
+            const res = await fetch('/api/getRecommendations', {
                 method: 'post',
-                body: JSON.stringify(info)
+                body: JSON.stringify(data)
             })
+            const response = await res.json()
+            console.log(response)
+            const newRecs = {id : mediaInfo.imdbID, list : response.recs}
+            setRecs(newRecs)
         } catch (error) {
             console.log(error)
+        }        
+    }
+
+    useEffect(() => {
+        async function getRecsContainer() {
+            await getRecs()            
         }
-    } 
+        getRecsContainer()
+    },[mediaInfo.imdbID])
 
     return (
         <div>
@@ -34,18 +54,21 @@ export default function Media ({mediaInfo, recs}){
             <img src={mediaInfo.Poster}></img>
             <p> {mediaInfo.Plot} </p>
 
-            {loggedIn ? (
-                <div>
-                    <button onClick={addToList} >Add to watched</button>
-                </div>
-            ) : (
-                <div></div>
-            )}
+            <AddRemoveButton mediaInfo={mediaInfo}/>
            
-            <h1>Your Recommendations are: </h1>
-            {recs.map((media) => (
+           {recs.list.length == 0  || recs.id != mediaInfo.imdbID ? (
+           <div>
+               <h2>Recommendations loading...</h2>
+           </div>) : 
+           (<div>
+           <h1>Similar titles to {mediaInfo.Title} </h1>
+           <div id='list'>
+            {recs.list.map((media) => (
                 <MediaCard media={media}/>
             ))}
+            </div>
+            </div>)}
+            
         </div>
     )
 }
@@ -59,17 +82,25 @@ export async function getServerSideProps({ params }) {
     var query = {imdbID : params.media}
 
     const mediaInfo = await db
-    .collection("MoviesAndTv")
+    .collection("MaxsMoviesAndTv")
     .find(query)
     .toArray();
 
-    const recommendations = await getRecommendations([params.media])
+    const data= {
+        movieList: [params.media],
+        genreList: [],
+        type: ['movie', 'series'],
+        min: 0,
+        max: 10
+    }
+
+    // const recommendations = await getRecommendations(data)
 
 
     return {
         props: {
             mediaInfo: JSON.parse(JSON.stringify(mediaInfo))[0],
-            recs: recommendations
+            // recs: recommendations
         }
     }
 }

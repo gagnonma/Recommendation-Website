@@ -22,9 +22,11 @@ function List({list}) {
     return (
         <div>
             <h2>{list.name}</h2>
+            <div id="list">
             {list.mediaList.map((media) => (
                 <MediaCard media={media}/>
             ))}
+            </div>
 
         </div>
     )

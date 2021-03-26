@@ -1,6 +1,6 @@
 import { connectToDatabase } from "./mongodb"
 
-export async function getRecommendations(movieList) {
+export async function getRecommendations({movieList, genreList, type, min, max}) {
     const { db } = await connectToDatabase();
 
     const movies = await db
@@ -31,7 +31,7 @@ export async function getRecommendations(movieList) {
         movieIds.push(mId.dfIndex)
     }
     scores_condensed_array = scores_condensed_array.filter(score => !movieIds.includes(score[0]))
-    scores_condensed_array = scores_condensed_array.slice(0,10)
+    scores_condensed_array = scores_condensed_array.slice(0,100)
 
     var rec_df_indices = []
     for (const movie of scores_condensed_array) {
@@ -39,35 +39,41 @@ export async function getRecommendations(movieList) {
     }
 
     var rec_imdbIDs = []
-    for (const index of rec_df_indices) {
-        const scores_imdbIds = await db
+    const scores_imdbIds = await db
         .collection("MovieSim")
-        .find({'dfIndex': index})
+        .find({'dfIndex': {$in: rec_df_indices}})
         .toArray();
-        rec_imdbIDs.push(scores_imdbIds[0].imdbID)
+    for (var i of scores_imdbIds) {
+        rec_imdbIDs.push(i.imdbID)
     }
 
-    const recommendations = await db
-    .collection("MoviesAndTv")
-    .find({'imdbID' : {$in: rec_imdbIDs}})
-    .toArray();
-    // const scores_imdbIds = await db
-    // .collection("MovieSim")
-    // .find({'dfIndex': {$in: rec_df_indices}})
-    // .toArray();
 
-    // var rec_imdbIDs = []
-    // for (const movie of scores_imdbIds) {
-    //     rec_imdbIDs.push(movie.imdbID)
+    // for (const index of rec_df_indices) {
+    //     const scores_imdbIds = await db
+    //     .collection("MovieSim")
+    //     .find({'dfIndex': index})
+    //     .toArray();
+    //     rec_imdbIDs.push(scores_imdbIds[0].imdbID)
     // }
 
-    // var test = []
-    // for (const movie of scores_imdbIds) {
-    //     test.push(movie.dfIndex)
-    // }
-
-    // console.log(recommendations)
-    // console.log(scores_imdbIds)
+    var recommendations = []
+    console.log(genreList)
+    if (genreList.length > 0) {
+        recommendations = await db
+        .collection("MaxsMoviesAndTv")
+        .find({'imdbID' : {$in: rec_imdbIDs}, 
+            'Genre': {$in: genreList}, 
+            'imdbRating': {$gt: min, $lt: max}, 
+            'Type': {$in: type}})
+        .toArray();
+    } else {
+        recommendations = await db
+        .collection("MaxsMoviesAndTv")
+        .find({'imdbID' : {$in: rec_imdbIDs}, 
+            'imdbRating': {$gt: min, $lt: max}, 
+            'Type': {$in: type}})
+        .toArray();
+    }
 
     return  JSON.parse(JSON.stringify(recommendations))
 }

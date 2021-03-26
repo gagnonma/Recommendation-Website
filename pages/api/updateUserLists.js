@@ -7,7 +7,9 @@ export default async (req, res) => {
     data = JSON.parse(data)
 
     const update = await db
-  .collection("Accounts")
-  .updateOne({username: data.username}, {$set: {lists: data.lists}})
+  .collection("users")
+  .updateOne({email: data.email}, {$set: {lists: data.lists}})
+
+  res.status(200).send('Updated lists')
 
 }
