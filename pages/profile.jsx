@@ -6,7 +6,6 @@ import { useCurrentUser } from '../hooks/index';
 
 
 export default function Profile() {
-    const {account, loggedIn, login,logout} = useContext(AccountContext)
     const [user, { mutate }] = useCurrentUser();
 
     return (

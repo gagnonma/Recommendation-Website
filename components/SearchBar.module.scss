@@ -1,62 +1,73 @@
 .container {
-    display: flex;
-    margin-left: 3%;
-    margin-right: 3%;
-  }
-  
-  .input {
-    width: 13em;
-    height: 1.2em;
-    padding: 0.5em;
-    font-family: Helvetica, sans-serif;
-    font-weight: 300;
-    font-size: 1em;
-    border: 1px solid #aaa;
-    border-radius: .2em;
-    display: block;    
-  }
-  
-  .inputFocused {
-    outline: none;
-  }
-  
-  .inputOpen {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-  
-  .suggestionsContainer {
-    display: none;
-  }
-  
-  .suggestionsContainerOpen {
-    display: block;
-    position: absolute;
-    // top: 0em;
-    width: 13.18em;
-    border: 1px solid #aaa;
-    border-top: none;
-    background-color: #fff;
-    font-family: Helvetica, sans-serif;
-    font-weight: 300;
-    font-size: 1em;
-    border-radius: 0 0 4px 4px;
-    z-index: 2;
-    // margin-left: 0.5%;
-    margin-top: 2em;
-  }
-  
-  .suggestionsList {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-  }
-  
-  .suggestion {
-    cursor:pointer;
-    padding: 10px 20px;
-  }
-  
-  .suggestionHighlighted {
-    background-color: #ddd;
-  }
+    display: inline-block;
+}
+
+.input {
+  width: 13em;
+  // height: 1.2em;
+  padding: 0.5em;
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 1em;
+  border: 1px solid #aaa;
+  border-radius: .2em;
+  display: block;    
+}
+
+.inputFocused {
+  outline: none;
+}
+
+.inputOpen {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.suggestionsContainer {
+  display: none;
+}
+
+.suggestionsContainerOpen {
+  display: block;
+  position: absolute;
+  // top: 0em;
+  width: 14em;
+  border: 1px solid #aaa;
+  border-top: none;
+  background-color: #fff;
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 1em;
+  border-radius: 0 0 4px 4px;
+  z-index: 2;
+  // margin-left: 0.5%;
+}
+
+.suggestionsList {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.suggestion {
+  cursor:pointer;
+}
+
+.suggestionHighlighted {
+  background-color: #ddd;
+}
+
+.suggest_btn {
+  width: 100%;
+  text-align: left;
+  background-color: white;
+  border: none;
+  padding: .25em;
+  cursor: pointer;
+}
+
+.suggest_btn:hover {
+  background-color: #aaa;
+}
+
+

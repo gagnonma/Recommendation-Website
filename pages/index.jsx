@@ -11,13 +11,14 @@ export default function Home({ isConnected }) {
   const [user, { mutate }] = useCurrentUser();
 
   return (
-    <div className="">
+    <div id="container">
       <Head>
         <title>MMDB</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar/>
-      <main>
+      <div id='main' >
+       <img id="banner" src="/mmdbBanner.jpg" alt="MMDB banner image"/>
        
         <h1 className="title">
           Welcome to Max's Movie Database
@@ -42,7 +43,7 @@ export default function Home({ isConnected }) {
         <h2>Sample Movies</h2>
         <Link href="/title/tt0386676"><button>The Office</button></Link>
         <Link href="/title/tt0796366"><button>Star Trek</button></Link>
-      </main>
+      </div>
     </div>
   )
 }

@@ -1,13 +1,23 @@
-#navbar {
-    width: 100%;
-    display: flex;
-    background-color: #D6D7CF;
-    padding: 0.5em;
-    overflow: auto;
-    box-shadow: 3px 3px black;}
+html, body {
+    margin: 0;
+    padding: 0;
+  }  
 
-#navLink {
-    margin-left: 10em;
+#container {
+    background-color: black;
+}
+
+#main {
+    width: 85%;
+    background-color: #292929;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#banner {
+    width: 100%;
+    height: 30%;
 }
 
 #mediaCard {
@@ -29,3 +39,4 @@
     grid-template-columns: 20% 20% 20% 20% 20%;
     grid-template-rows: min-content;
 }
+

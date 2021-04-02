@@ -3,8 +3,9 @@ import AccountContext from '../contexts/account'
 import Link from 'next/link'
 import SearchBar from '../components/SearchBar'
 import { useCurrentUser } from '../hooks/index';
-import { AppBar, Button } from '@material-ui/core';
+import { AppBar, span } from '@material-ui/core';
 import styles from './NavBar.module.scss'
+import Search from './Search';
 
 
 function NavBar() {
@@ -20,22 +21,24 @@ function NavBar() {
       };
 
     return (
-        <div id='navbar'>
-            <div>
-            <Link href='/'><Button  variant="contained">Home</Button></Link>
-            </div>
-            <SearchBar/>
+        <div className={styles.navbar}>
+            
             {user ? (
-                <div>
-                    <Link href='/recommend'><Button  variant="contained">My Recommendations</Button></Link>
-                    <Link  href="/profile"><Button  variant="contained">My Account</Button></Link>
-                    <Button  variant="contained" onClick={handleLogout}>Logout</Button>
-                </div>
-            ) : (
-                <div>
-                    <Link href='/signup'><Button  variant="contained">Create an Account</Button></Link>
-                    <Link href='/login'><Button  variant="contained">Log in</Button></Link>
-                </div>
+                    <ul className={styles.nav_ul}>
+                        <li className={styles.nav_li}><Link href='/'><img className={styles.logo} src="/mmdb.png" alt="mmdb logo"/></Link></li>
+                        <li className={styles.nav_li}><SearchBar/></li>
+                        <li className={styles.nav_li_right}><span style={{color: '#22f617'}} className={styles.navbtn}onClick={handleLogout}>Logout</span></li>
+                        <li className={styles.nav_li_right}><Link  href="/profile"><span style={{color: '#178af6'}}  className={styles.navbtn}>My Account</span></Link></li>
+                        <li className={styles.nav_li_right}><Link href='/recommend' ><span style={{color: '#e11717'}} className={styles.navbtn}>My Recommendations</span></Link></li>
+
+                    </ul>
+                    ) : (
+                <ul className={styles.nav_ul}>
+                    <li><Link href='/'><span  className={styles.navbtn}>Home</span></Link></li>
+                    <li><SearchBar/></li>
+                    <li><Link href='/signup'><span className={styles.navbtn}>Create an Account</span></Link></li>
+                    <li><Link href='/login'><span className={styles.navbtn}>Log in</span></Link></li>
+                </ul>
             )}
         </div>
     )

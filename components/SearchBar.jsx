@@ -2,18 +2,9 @@ import React from 'react';
 import Autosuggest from 'react-autosuggest';
 import Link from 'next/link'
 import theme from './SearchBar.module.scss'
+import { useRouter } from 'next/router'
 
-// Imagine you have a list of languages that you'd like to autosuggest.
-const languages = [
-  {
-    name: 'C',
-    year: 1972
-  },
-  {
-    name: 'Elm',
-    year: 2012
-  },
-];
+
 
 // Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = async value => {
@@ -45,11 +36,11 @@ const getSuggestions = async value => {
   // );
 };
 
-// const onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
-//     const router = useRouter()
-//     console.log(suggestion)
-//     router.push(`/title/${suggestion.imdbID}`)
-// }
+const onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
+    const router = useRouter()
+    console.log(suggestion)
+    router.push(`/title/${suggestion.imdbID}`)
+}
 
 // When suggestion is clicked, Autosuggest needs to populate the input
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
@@ -58,7 +49,8 @@ const getSuggestionValue = suggestion => suggestion.Title;
 
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
-  <Link href={`/title/${suggestion.imdbID}`}><button>{suggestion.Title}</button></Link>
+  <Link href={`/title/${suggestion.imdbID}`}>
+    <button className={theme.suggest_btn}>{suggestion.Title} ({suggestion.Year})</button></Link>
 );
 
 class SearchBar extends React.Component {

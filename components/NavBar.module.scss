@@ -1,3 +1,45 @@
-.link {
-    display: inline;
+
+
+.navbtn {
+    display: block;
+    cursor: pointer;
+    font-family: ravie, monotone;
+    color: white;
+    font-weight: 300;
+    font-size: 1em;
+    // border: 0.5em ridge #aaa;
+    // border-radius: .2em;
+    text-align: center;
+    // background-color: #aaa;
+    padding: 0.5em;
+
+}
+
+.navbar {
+    background-color: #292929;
+    padding: 0.5em;
+}
+
+
+.nav_ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.nav_li {
+    float: left;
+    margin-right: 1%;
+}
+
+.nav_li_right {
+    float: right;
+}
+
+
+.logo {
+    width: 6.5em;
+    height: auto;
+    cursor: pointer;
 }
