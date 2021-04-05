@@ -13,9 +13,8 @@ export default function Profile() {
             <div>
              <NavBar/>
              {user ? (
-                <div>
-                    <h2>{user.name}</h2>
-                    <h2>Your Lists</h2>
+                <div id="main">
+                    <h1>Hello {user.name}</h1>
                     {user.lists.map((l) => (
                         <List list={l}/>
                     ))}

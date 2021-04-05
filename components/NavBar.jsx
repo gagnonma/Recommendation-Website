@@ -34,10 +34,10 @@ function NavBar() {
                     </ul>
                     ) : (
                 <ul className={styles.nav_ul}>
-                    <li><Link href='/'><span  className={styles.navbtn}>Home</span></Link></li>
-                    <li><SearchBar/></li>
-                    <li><Link href='/signup'><span className={styles.navbtn}>Create an Account</span></Link></li>
-                    <li><Link href='/login'><span className={styles.navbtn}>Log in</span></Link></li>
+                    <li className={styles.nav_li}><Link href='/'><img className={styles.logo} src="/mmdb.png" alt="mmdb logo"/></Link></li>
+                    <li className={styles.nav_li}><SearchBar/></li>
+                    <li className={styles.nav_li_right}><Link href='/signup'><span style={{color: '#178af6'}} className={styles.navbtn}>Create an Account</span></Link></li>
+                    <li className={styles.nav_li_right}><Link href='/login'><span style={{color: '#e11717'}} className={styles.navbtn}>Log in</span></Link></li>
                 </ul>
             )}
         </div>

@@ -48,13 +48,29 @@ export default function Media ({mediaInfo}){
     },[mediaInfo.imdbID])
 
     return (
-        <div>
+        <div id="container">
             <NavBar/>
-            <h1> {mediaInfo.Title} </h1>
-            <img src={mediaInfo.Poster}></img>
-            <p> {mediaInfo.Plot} </p>
+            <div id="main">
+            <div id="info">
+                <div id="titleContainer">
+                <h1> {mediaInfo.Title} ({mediaInfo.Year}) </h1>
+                <p><span> {mediaInfo.Rated} | {mediaInfo.Runtime} | {mediaInfo.Type}</span></p>
+                </div>
+                <p><span id="bold">Genre:</span> {mediaInfo.Genre.map((genre, i) => <span key={i}>{i > 0 && ","}{genre}</span>)}</p>
+                <p><span id="bold">Director:</span> {mediaInfo.Director.map((d, i) => <span key={i}>{i > 0 && ","}{d}</span>)}</p>
+                <p><span id="bold">Ratings:</span></p> 
+                <ul>
+                 {mediaInfo.Ratings.map((r) => <div>
+                    <li id="rating"><p>{r.Source} : {r.Value}</p></li>
+                </div>)}
+                </ul>
+                <p><span id="bold">Plot:</span>  {mediaInfo.Plot} </p>
 
-            <AddRemoveButton mediaInfo={mediaInfo}/>
+            </div>
+            <img id="poster" src={mediaInfo.Poster}></img>
+
+
+            <div id="clear"><AddRemoveButton mediaInfo={mediaInfo}/></div>
            
            {recs.list.length == 0  || recs.id != mediaInfo.imdbID ? (
            <div>
@@ -68,6 +84,8 @@ export default function Media ({mediaInfo}){
             ))}
             </div>
             </div>)}
+
+            </div>
             
         </div>
     )

@@ -9,9 +9,9 @@ function MediaCard({media}) {
     return (
         <div id="mediaCard">
             <Link href={`/title/${media.imdbID}`}><img src={media.Poster} /></Link>
-            <p>{media.Title}</p>
-            <p>{media.imdbRating}</p>
-            <AddRemoveButton mediaInfo={media} />
+            <p>{media.Title} ({media.Year})</p>
+            <p>{media.imdbRating}/10</p>
+            <div id="addRemove"><AddRemoveButton mediaInfo={media} /></div>
         </div>
     )
 }

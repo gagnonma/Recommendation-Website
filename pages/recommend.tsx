@@ -10,9 +10,10 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormGroup from '@material-ui/core/FormGroup';
 import Input from '@material-ui/core/Input';
-import { Checkbox, FormControlLabel, FormLabel, IconButton } from '@material-ui/core'
+import { Checkbox, FormControlLabel, FormLabel, Grid, IconButton, Button } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import { createMuiTheme, ThemeProvider, withStyles } from '@material-ui/core/styles'
 
 
 
@@ -59,6 +60,19 @@ const g = {
     "War" : false,
     "Western" : false
 }
+
+const theme = createMuiTheme({
+    palette: {
+      type: "dark",
+    }
+  });
+
+const StyledFormControlLabel = withStyles({
+    label: {
+        color: 'white',
+        fontFamily: "'Courier New', Courier, monospace",
+    }
+})(FormControlLabel);
 
 
 export default function Recommend() {
@@ -147,14 +161,18 @@ export default function Recommend() {
     return (
         <div>
             <NavBar/>
+            <div id="main">
             {user ? (
             <div>
             
 
             <h2>Filters</h2>
+
+            <ThemeProvider theme={theme}>
         
             {displayFilters ? (
                 <div>
+                    
                     <IconButton onClick={showFilters}>
                         <RemoveIcon/>
                     </IconButton>
@@ -190,11 +208,11 @@ export default function Recommend() {
                         </MenuItem>
                     ))}
                     </TextField>
-                    <FormGroup>
                     <FormLabel component="legend" >Genres</FormLabel>
-                    
+                    <br/>
+                    <Grid lg={10} md={5} sm={3} spacing={2} container={true}>
                         {Object.entries(genreList).map(([genre, checked]) => (
-                            <FormControlLabel
+                            <StyledFormControlLabel
                                 control={
                                     <Checkbox checked={checked} onChange={handleGenreChange(genre)} value={genre} />
                                 }
@@ -202,26 +220,30 @@ export default function Recommend() {
                             />
                         ))}
 
-                    </FormGroup>
+                    </Grid>
                 </div>
             ) : (
                 <div>
                     <IconButton onClick={showFilters}>
-                        <AddIcon />
+                        <AddIcon  style={{ color: 'white'}} />
                     </IconButton>
                 </div>
             )}
+
+            </ThemeProvider>
                 
                 
                 
             <h1>Your Recommendations are: </h1>
-            <button onClick={getRecs}>Generate Recommendations</button>
+            <Button onClick={getRecs} variant='contained'>Generate Recommendations</Button>
+            <br/>
             <div id='list'>
             {recs.map((media) => (
                 <MediaCard media={media}/>
             ))}
             </div>
             </div>) : (<h1>Please log in</h1>)}
+            </div>
         </div>
     )
 }

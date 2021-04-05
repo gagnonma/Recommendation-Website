@@ -1,42 +1,105 @@
 html, body {
     margin: 0;
     padding: 0;
+    background-color: black;
   }  
 
+//   not needed right now
 #container {
     background-color: black;
+    
 }
 
 #main {
     width: 85%;
-    background-color: #292929;
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
 }
 
 #banner {
     width: 100%;
-    height: 30%;
 }
 
 #mediaCard {
-    display: inline-block;
-    border: .1em solid black;
-    background-color:#D6D7CF;
-    width: 100%;
-    margin: 5%;
-    padding: 2%;
+    border: 2px solid #e7e7e7;
+    border-radius: 4px;
+    padding: .5rem;
+    position: relative;
+}
+
+#addRemove {
+    margin-top: 10%;
 }
 
 #mediaCard img {
     width: 100%;
-    height: 50%;
+    cursor: pointer;
+}
+
+#mediaCard img:hover {
+    opacity: 70%;
 }
 
 #list {
+    margin-top: 2em;
     display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
-    grid-template-rows: min-content;
+    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    grid-auto-rows: auto;
+    grid-gap: 1rem;
 }
+
+h1 {
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+}
+
+h2 {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+
+}
+
+p {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#info {
+    width: 50%;
+    margin-right: 0%;
+    float: left;
+}
+
+#poster {
+    float: right;
+    margin: 2.5%;
+    border: ridge .5em  white;
+    border-radius: .5em;
+    
+}
+
+#clear {
+    clear: both;
+}
+
+#bold {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+#titleContainer {
+    border: solid .1em white;
+    border-radius: 1em;
+    text-align: center;
+    margin-top: 5%;
+
+}
+
+#rating {
+    list-style-type: none;
+    // font-family: 'Courier New', Courier, monospace;
+
+}
+
+
 
