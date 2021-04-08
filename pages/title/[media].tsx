@@ -3,11 +3,13 @@ import { getRecommendations } from '../../util/getRecommendations'
 import { connectToDatabase } from "../../util/mongodb"
 import NavBar from '../../components/NavBar'
 import MediaCard from '../../components/MediaCard'
-import { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import AccountContext from '../../contexts/account'
 import { useCurrentUser } from '../../hooks/index';
 import Dropdown  from 'react-dropdown';
 import AddRemoveButton from '../../components/AddRemoveButton'
+import Head from 'next/head'
+
 
 
 
@@ -49,6 +51,10 @@ export default function Media ({mediaInfo}){
 
     return (
         <div id="container">
+            <Head>
+                <title> {mediaInfo.Title} ({mediaInfo.Year}) </title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <NavBar/>
             <div id="main">
             <div id="info">

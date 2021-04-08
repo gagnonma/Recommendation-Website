@@ -71,9 +71,7 @@ export async function getRecommendations({movieList, genreList, type, min, max})
         rec_df_indices2.push(parseInt(movie[0]))
     }
 
-    var today = new Date();
-    time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    console.log(`peepee ${rec_df_indices2.length}   ${time}`)
+
     
     var rec_imdbIDs = []
     const scores_imdbIds = await db
@@ -81,9 +79,7 @@ export async function getRecommendations({movieList, genreList, type, min, max})
         .find({'dfIndex': {$in: rec_df_indices2}}, {'imdbID' : 1, 'dfIndex' : 1})
         .toArray();
 
-        var today = new Date();
-    time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    console.log(`poopoo${time}`)
+
 
     for (var i of scores_imdbIds) {
         rec_imdbIDs.push(i.imdbID)
@@ -94,9 +90,6 @@ export async function getRecommendations({movieList, genreList, type, min, max})
     .find({'imdbID' : {$in: rec_imdbIDs}})
     .toArray();
 
-    var today = new Date();
-    time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    console.log(`Got Recs ${time}`)
 
     var recsInOrder = []
     for (var title of scores_condensed_array) {

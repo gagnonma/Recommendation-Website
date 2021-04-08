@@ -3,6 +3,8 @@ import { useContext } from 'react'
 import AccountContext from '../contexts/account'
 import List from '../components/List'
 import { useCurrentUser } from '../hooks/index';
+import Head from 'next/head'
+
 
 
 export default function Profile() {
@@ -10,6 +12,10 @@ export default function Profile() {
 
     return (
         <div>
+            <Head>
+                <title> Profile </title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <div>
              <NavBar/>
              {user ? (

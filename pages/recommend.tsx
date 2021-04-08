@@ -14,6 +14,8 @@ import { Checkbox, FormControlLabel, FormLabel, Grid, IconButton, Button } from 
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import { createMuiTheme, ThemeProvider, withStyles } from '@material-ui/core/styles'
+import Head from 'next/head'
+
 
 
 
@@ -61,11 +63,11 @@ const g = {
     "Western" : false
 }
 
-const theme = createMuiTheme({
-    palette: {
-      type: "dark",
-    }
-  });
+// const theme = createMuiTheme({
+//     palette: {
+//       type: "dark",
+//     }
+//   });
 
 const StyledFormControlLabel = withStyles({
     label: {
@@ -160,6 +162,10 @@ export default function Recommend() {
 
     return (
         <div>
+            <Head>
+                <title> MMDB Recommendations </title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <NavBar/>
             <div id="main">
             {user ? (
@@ -168,7 +174,7 @@ export default function Recommend() {
 
             <h2>Filters</h2>
 
-            <ThemeProvider theme={theme}>
+            {/* <ThemeProvider theme={theme}> */}
         
             {displayFilters ? (
                 <div>
@@ -230,7 +236,7 @@ export default function Recommend() {
                 </div>
             )}
 
-            </ThemeProvider>
+            {/* </ThemeProvider> */}
                 
                 
                 
