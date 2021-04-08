@@ -5,7 +5,6 @@ import AddRemoveButton from './AddRemoveButton'
 
 
 function MediaCard({media}) {
-    console.log(media.poster)
     return (
         <div id="mediaCard">
             <Link href={`/title/${media.imdbID}`}><img src={media.Poster} /></Link>

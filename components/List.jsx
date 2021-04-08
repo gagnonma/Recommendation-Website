@@ -3,7 +3,7 @@ import React from 'react'
 import MediaCard from './MediaCard'
 
 function List({list}) {
-    console.log(list)
+    // console.log(list)
 
     // const getMediaList = async(e) => {
     //     try {

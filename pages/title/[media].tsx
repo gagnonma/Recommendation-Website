@@ -34,7 +34,7 @@ export default function Media ({mediaInfo}){
                 body: JSON.stringify(data)
             })
             const response = await res.json()
-            console.log(response)
+            // console.log(response)
             const newRecs = {id : mediaInfo.imdbID, list : response.recs}
             setRecs(newRecs)
         } catch (error) {

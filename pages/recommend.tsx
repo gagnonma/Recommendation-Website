@@ -69,6 +69,13 @@ const g = {
 //     }
 //   });
 
+
+const StyledButton = withStyles({
+    root: {
+        fontFamily: "'Courier New', Courier, monospace",
+    }
+})(Button);
+
 const StyledFormControlLabel = withStyles({
     label: {
         color: 'white',
@@ -85,6 +92,7 @@ export default function Recommend() {
     const [max, setMax] = useState(10)
     const [genreList, setGenreList] = useState(g)
     const [displayFilters, setDisplayFilters] = useState(false)
+    const [generatePressed, setGeneratePressed] = useState(false)
     console.log(recs)
 
     const handleTypeChange = (e) => {
@@ -113,6 +121,7 @@ export default function Recommend() {
     }
 
     const getRecs = async(e) => {
+        setGeneratePressed(true)
         var genres = []
         var scoreMin = min
         var scoreMax = max
@@ -150,12 +159,13 @@ export default function Recommend() {
                 body: JSON.stringify(info)
             })
             const response = await res.json()
-            console.log(response)
+            // console.log(response)
             setRecs(response.recs)
         } catch (error) {
             console.log(error)
-        }        
-        window.scrollBy(0, 500)
+        } 
+        setGeneratePressed(false)       
+        window.scrollBy(0, 200)
     }
     // Filters: Genres, Score Range, type
     //Sort by: score, popularity, similarity
@@ -241,8 +251,9 @@ export default function Recommend() {
                 
                 
             <h1>Your Recommendations are: </h1>
-            <Button onClick={getRecs} variant='contained'>Generate Recommendations</Button>
+            <StyledButton onClick={getRecs} variant='contained'>Generate Recommendations</StyledButton>
             <br/>
+            {generatePressed ? (<p>Loading Recommendations...</p>) : (<div/>)}
             <div id='list'>
             {recs.map((media) => (
                 <MediaCard media={media}/>

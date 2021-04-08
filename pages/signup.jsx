@@ -58,10 +58,12 @@ const SignupPage = () => {
       
       <div>
       <NavBar/>
+        <div id="center">
         <h2>Sign up</h2>
         <form onSubmit={handleSubmit}>
           {errorMsg ? <p style={{ color: 'red' }}>{errorMsg}</p> : null}
           <label htmlFor="name">
+            <p>Name: </p>
             <input
               id="name"
               name="name"
@@ -70,6 +72,7 @@ const SignupPage = () => {
             />
           </label>
           <label htmlFor="email">
+            <p>Email Address</p>
             <input
               id="email"
               name="email"
@@ -78,6 +81,7 @@ const SignupPage = () => {
             />
           </label>
           <label htmlFor="password">
+            <p>Password: </p>
             <input
               id="password"
               name="password"
@@ -85,12 +89,10 @@ const SignupPage = () => {
               placeholder="Create a password"
             />
           </label>
-          <button type="submit">Sign up</button>
+          <br/><br/>
+          <button id="submit" type="submit">Sign up</button>
         </form>
-        <p style={{ color: '#777', textAlign: 'center' }}>
-          Note: The database is public. For your privacy,
-          please avoid using your personal, work email.
-        </p>
+        </div>
       </div>
     </>
   );

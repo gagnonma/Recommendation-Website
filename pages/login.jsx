@@ -39,10 +39,11 @@ const LoginPage = () => {
         <title>Sign in</title>
       </Head>
       <NavBar/>
+      <div id="center">
       <h2>Sign in</h2>
       <form onSubmit={onSubmit}>
         {errorMsg ? <p style={{ color: 'red' }}>{errorMsg}</p> : null}
-        <label htmlFor="email">
+        <label htmlFor="email"> <p>Email Address: </p>
           <input
             id="email"
             type="email"
@@ -50,7 +51,7 @@ const LoginPage = () => {
             placeholder="Email address"
           />
         </label>
-        <label htmlFor="password">
+        <label htmlFor="password"> <p>Password: </p>
           <input
             id="password"
             type="password"
@@ -58,8 +59,10 @@ const LoginPage = () => {
             placeholder="Password"
           />
         </label>
-        <button type="submit">Sign in</button>
+        <br/><br/>
+        <button id="submit" type="submit">Sign in</button>
       </form>
+      </div>
     </>
   );
 };
