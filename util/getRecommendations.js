@@ -21,9 +21,11 @@ export async function getRecommendations({movieList, genreList, type, min, max})
         }
     }
 
-    // var today = new Date();
-    // time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    // console.log(`Scores Condensed: ${time}`)
+
+
+    var today = new Date();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    console.log(`Scores Condensed: ${time}`)
     
     var scores_condensed_array = Object.entries(scores_condensed)
 
@@ -32,8 +34,7 @@ export async function getRecommendations({movieList, genreList, type, min, max})
         movieIds.push(mId.dfIndex)
     }
 
-    scores_condensed_array = scores_condensed_array.filter(score => !movieIds.includes(parseInt(score[0]))).sort(([,a],[,b]) => b-a).slice(1700)
-
+    scores_condensed_array = scores_condensed_array.filter(score => !movieIds.includes(parseInt(score[0]))).sort(([,a],[,b]) => b-a).slice(0,1700)
    
     var rec_df_indices = []
     for (const movie of scores_condensed_array) {
@@ -58,6 +59,7 @@ export async function getRecommendations({movieList, genreList, type, min, max})
                 'Type': {$in: type}})
             .toArray();
     }
+
 
 
     scores_condensed_array = scores_condensed_array
